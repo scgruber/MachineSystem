@@ -26,3 +26,26 @@ shaderScripts['vert'] = {
     '}'
   ].join('\n')
 };
+
+function getShader(name) {
+  if (!shaderScripts[name]) return null;
+
+  var shader;
+  if(shaderScripts[name].type == 'x-shader/x-fragment') {
+    shader = glData.gl.createShader(glData.gl.FRAGMENT_SHADER);
+  } else if (shaderScripts[name].type == 'x-shader/x-vertex') {
+    shader = glData.gl.createShader(glData.gl.VERTEX_SHADER);
+  } else {
+    return null;
+  }
+
+  glData.gl.shaderSource(shader, str);
+  glData.gl.compileShader(shader);
+
+  if (!glData.gl.getShaderParameter(shader, glData.gl.COMPILE_STATUS)) {
+    alert(glData.gl.getShaderInfoLog(shader));
+    return null;
+  }
+
+  return shader;
+}
