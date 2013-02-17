@@ -5,7 +5,7 @@ var glData = {
   mvMatrix: mat4.create(),
   buf: {
     nodeVertexPos: null
-  }
+  },
   view: {
     x: 0,
     y: 0,
