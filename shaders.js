@@ -32,9 +32,9 @@ function getShader(name) {
 
   var shader;
   if(shaderScripts[name].type == 'x-shader/x-fragment') {
-    shader = gl.createShader(glData.gl.FRAGMENT_SHADER);
+    shader = gl.createShader(gl.FRAGMENT_SHADER);
   } else if (shaderScripts[name].type == 'x-shader/x-vertex') {
-    shader = gl.createShader(glData.gl.VERTEX_SHADER);
+    shader = gl.createShader(gl.VERTEX_SHADER);
   } else {
     return null;
   }
