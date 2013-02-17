@@ -14,7 +14,7 @@ shaderScripts['frag'] = {
 };
 
 shaderScripts['vert'] = {
-  type: 'x-shader/x-fragment',
+  type: 'x-shader/x-vertex',
   source: [
     'attribute vec3 aVertexPosition;',
     '',
