@@ -4,9 +4,9 @@ var drowsyUrl = "http://visium.club.cc.cmu.edu:8080";
 
 // Global data structure
 var machinesystem = {
-  rackList: {};
-  physList: {};
-  virtList: {};
+  rackList: {},
+  physList: {},
+  virtList: {}
 };
 
 function updateServers() {
