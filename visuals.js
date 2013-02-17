@@ -1,6 +1,5 @@
 // Global GL data structure
 var glData = {
-  gl: null,
   shaderProgram: null,
   pMatrix: mat4.create(),
   mvMatrix: mat4.create(),
@@ -8,7 +7,8 @@ var glData = {
     nodeVertexPos: null
   }
 };
-var gl = glData.gl; // For brevity
+
+var gl;
 
 function initGL(canvas) {
   try {
