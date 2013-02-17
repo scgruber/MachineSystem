@@ -52,8 +52,8 @@ function Rack(name) {
   this.count = 0;
   this.children = [];
 
-  this.x = (Math.random()-0.5) * 100.0;
-  this.y = (Math.random()-0.5) * 100.0;
+  this.x = (Math.random()-0.5) * 250.0;
+  this.y = (Math.random()-0.5) * 250.0;
   this.z = 0.0;
 }
 
@@ -66,6 +66,7 @@ Rack.prototype.draw = function() {
   mvPushMatrix();
 
   mat4.translate(glData.mvMatrix, [this.x, this.y, this.z]);
+  mat4.scale(glData.mvMatrix, [this.count+1, this.count+1, this.count+1])
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
@@ -107,8 +108,8 @@ Phys.prototype.addVirtualServer = function(vServer) {
 Phys.prototype.draw = function() {
   // Update code
   this.orbitRadius = (this.orbitRadius + (this.mem/10000.0))/2;
-  this.theta = (this.theta + (this.cpu/10000.0)) % Math.PI;
-  this.radius = (this.radius + (this.disk/1000000.0))/2;
+  this.theta = (this.theta + (this.cpu/1000.0)) % (2*Math.PI);
+  this.radius = (this.radius + (this.disk/100000.0))/2;
 
   // Draw code
   mvPushMatrix();
