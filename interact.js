@@ -1,6 +1,6 @@
 // Keyboard control of pan and zoom
 
-$('#visualization').keypress(function() {
+$(document).keydown(function() {
   switch (event.which) {
     case 65: // A (Left)
       glData.view.x++;
