@@ -65,7 +65,7 @@ Rack.prototype.addPhysicalServer = function(pServer) {
 Rack.prototype.draw = function() {
   mvPushMatrix();
 
-  mat4.translate(mvMatrix, [this.x, this.y, this.z]);
+  mat4.translate(glData.mvMatrix, [this.x, this.y, this.z]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);

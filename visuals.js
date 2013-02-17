@@ -3,6 +3,7 @@ var glData = {
   shaderProgram: null,
   pMatrix: mat4.create(),
   mvMatrix: mat4.create(),
+  mvMatrixStack: [],
   buf: {
     nodeVertexPos: null
   },
@@ -52,6 +53,19 @@ function initShaders() {
 function setMatrixUniforms() {
   gl.uniformMatrix4fv(glData.shaderProgram.pMatrixUniform, false, glData.pMatrix);
   gl.uniformMatrix4fv(glData.shaderProgram.mvMatrixUniform, false, glData.mvMatrix);
+}
+
+function mvPushMatrix() {
+  var copy = mat4.create();
+  mat4.set(glData.mvMatrix, copy);
+  glData.mvMatrixStack.push(copy);
+}
+
+function mvPopMatrix() {
+  if (glData.mvMatrixStack.length == 0) {
+    throw "invalid popMatrix!";
+  }
+  glData.mvMatrix = glData.mvMatrixStack.pop();
 }
 
 function initBuffers() {
