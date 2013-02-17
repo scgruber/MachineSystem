@@ -146,9 +146,9 @@ Phys.prototype.draw = function() {
 
 function Virt(name) {
   this.name = name;
-  this.mem = mem;
-  this.cpu = cpu;
-  this.disk = disk;
+  this.mem = 0;
+  this.cpu = 0;
+  this.disk = 0;
 
   this.orbitRadius = 0.0;
   this.theta = 0.0;
