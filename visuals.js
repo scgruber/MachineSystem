@@ -79,7 +79,7 @@ function drawScene() {
   mat4.translate(glData.mvMatrix, [glData.view.x, glData.view.y, glData.view.z]);
 
   for (r in machinesystem.rackList) {
-    r.draw();
+    machinesystem.rackList[r].draw();
   }
 }
 
