@@ -52,9 +52,9 @@ function Rack(name) {
   this.count = 0;
   this.children = [];
 
-  this.x = Math.random() * 10.0;
-  this.y = Math.random() * 10.0;
-  this.z = Math.random() * 10.0;
+  this.x = (Math.random()-0.5) * 1000.0;
+  this.y = (Math.random()-0.5) * 1000.0;
+  this.z = 0.0;
 }
 
 Rack.prototype.addPhysicalServer = function(pServer) {
