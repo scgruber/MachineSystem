@@ -141,6 +141,10 @@ Phys.prototype.draw = function() {
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
+  for (var i=this.count-1; i>=0; i--) {
+    this.children[i].draw();
+  }
+
   mvPopMatrix();
 }
 
