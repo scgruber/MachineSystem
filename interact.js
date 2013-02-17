@@ -2,7 +2,6 @@
 
 $(document).ready(function() {
   $(document).keydown(function(event) {
-    alert(event.which);
     switch (String.fromCharCode(event.which)) {
       case 'A': // A (Left)
         glData.view.x++;

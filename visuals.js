@@ -84,6 +84,16 @@ function drawScene() {
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 }
 
+function updateScene() {
+  return;
+}
+
+function doNextFrame() {
+  requestAnimFrame(doNextFrame);
+  drawScene();
+  updateScene();
+}
+
 function webGLStart() {
   var canvas = document.getElementById('visualization');
   initGL(canvas);
@@ -93,5 +103,5 @@ function webGLStart() {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
 
-  drawScene();
+  doNextFrame();
 }
