@@ -29,7 +29,7 @@ function initShaders() {
   glData.shaderProgram = gl.createProgram();
   gl.attachShader(glData.shaderProgram, vertexShader);
   gl.attachShader(glData.shaderProgram, fragmentShader);
-  gl.linkProgram(shaderProgram);
+  gl.linkProgram(glData.shaderProgram);
 
   if (!gl.getProgramParameter(glData.shaderProgram, gl.LINK_STATUS)) {
     alert('Could not initialize shaders');
