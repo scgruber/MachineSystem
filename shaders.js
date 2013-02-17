@@ -39,7 +39,7 @@ function getShader(name) {
     return null;
   }
 
-  gl.shaderSource(shader, str);
+  gl.shaderSource(shader, shaderScripts[name].source);
   gl.compileShader(shader);
 
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
