@@ -72,6 +72,10 @@ Rack.prototype.draw = function() {
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
+  for (var i=this.children.length-1; i>=0; i--) {
+    this.children[i].draw();
+  }
+
   mvPopMatrix();
 }
 
@@ -98,6 +102,27 @@ Phys.prototype.update = function(serverData) {
 Phys.prototype.addVirtualServer = function(vServer) {
   this.count++;
   this.children.push(vServer);
+}
+
+Phys.prototype.draw = function() {
+  // Update code
+  this.orbitRadius = (this.orbitRadius + (this.mem/10000.0))/2;
+  this.theta = (this.theta + (this.cpu/10000.0)) % Math.PI;
+  this.radius = (this.radius + (this.disk/1000000.0))/2;
+
+  // Draw code
+  mvPushMatrix();
+
+  mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
+  mat4.translate(glData.mvMatrix, [this.orbitRadius, 0, 0]);
+  mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
+  gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
+  setMatrixUniforms();
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
+
+  mvPopMatrix();
 }
 
 function Virt(name) {
