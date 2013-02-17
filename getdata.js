@@ -52,8 +52,8 @@ function Rack(name) {
   this.count = 0;
   this.children = [];
 
-  this.x = (Math.random()-0.5) * 1000.0;
-  this.y = (Math.random()-0.5) * 1000.0;
+  this.x = (Math.random()-0.5) * 100.0;
+  this.y = (Math.random()-0.5) * 100.0;
   this.z = 0.0;
 }
 
