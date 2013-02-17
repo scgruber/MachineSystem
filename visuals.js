@@ -6,6 +6,11 @@ var glData = {
   buf: {
     nodeVertexPos: null
   }
+  view: {
+    x: 0,
+    y: 0,
+    z: -50
+  }
 };
 
 var gl;
@@ -71,7 +76,7 @@ function drawScene() {
 
   mat4.perspective(45, gl.vpWidth / gl.vpHeight, 0.1, 100.0, glData.pMatrix);
   mat4.identity(glData.mvMatrix);
-  mat4.translate(glData.mvMatrix, [0.0, 0.0, -7.0]);
+  mat4.translate(glData.mvMatrix, [glData.view.x, glData.view.y, glData.view.z]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
