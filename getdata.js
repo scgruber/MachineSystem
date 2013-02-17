@@ -107,9 +107,9 @@ Phys.prototype.addVirtualServer = function(vServer) {
 
 Phys.prototype.draw = function() {
   // Update code
-  this.orbitRadius = (this.orbitRadius + (this.mem/10000.0))/2;
+  this.orbitRadius = (this.orbitRadius + (this.mem/100000.0))/2;
   this.theta = (this.theta + (this.cpu/1000.0)) % (2*Math.PI);
-  this.radius = (this.radius + (this.disk/100000.0))/2;
+  this.radius = (this.radius + (this.disk/1000000.0))/2;
 
   // Draw code
   mvPushMatrix();
