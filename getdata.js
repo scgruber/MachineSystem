@@ -39,6 +39,14 @@ function updateServers() {
   });
 }
 
+// Make sure this is updated constantly
+$(document).ready(function() {
+  updateServers();
+  window.setInterval(function() {
+    updateServers();
+  }, 5000);
+});
+
 function Rack(name) {
   this.name = name;
   this.count = 0;
