@@ -71,6 +71,7 @@ function drawScene() {
 
   mat4.perspective(45, gl.vpWidth / gl.vpHeight, 0.1, 100.0, glData.pMatrix);
   mat4.identity(glData.mvMatrix);
+  mat.translate(glData.mvMatrix, [0.0, 0.0, -7.0]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
