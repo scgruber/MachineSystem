@@ -28,7 +28,7 @@ function Rack(name) {
   this.z = 0.0;
 }
 
-Rack.prototype.addPhysicalServer(pServer) {
+Rack.prototype.addPhysicalServer = function(pServer) {
   this.count++;
   this.children.push(pServer);
 }
@@ -47,7 +47,7 @@ function Phys(name) {
   this.radius = 0.0;
 }
 
-Phys.prototype.addVirtualServer(vServer) {
+Phys.prototype.addVirtualServer = function(vServer) {
   this.count++;
   this.children.push(vServer);
 }
