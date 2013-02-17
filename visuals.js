@@ -78,10 +78,9 @@ function drawScene() {
   mat4.identity(glData.mvMatrix);
   mat4.translate(glData.mvMatrix, [glData.view.x, glData.view.y, glData.view.z]);
 
-  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
-  gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
-  setMatrixUniforms();
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
+  for (r in machinesystem.rackList) {
+    r.draw();
+  }
 }
 
 function updateScene() {
