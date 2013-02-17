@@ -6,14 +6,35 @@ var drowsyUrl = "http://visium.club.cc.cmu.edu:8080";
 var machinesystem = {
   rackList: {},
   physList: {},
-  virtList: {}
+  virtList: {},
 };
 
 function updateServers() {
   $.ajax(drowsyUrl + '/machinesystem/server', {
     type: 'get',
-    success: function (records) {
-      return;
+    success: function (servers) {
+      for (var i=servers.length-1; i>=0; i--) {
+        var srv = servers[i];
+        if (srv.kind == 'physical') {
+          // Create parent rack if needed
+          if (!machinesystem.rackList[srv.parent]) {
+            var r = new Rack(srv.parent);
+            machinesystem.rackList[srv.parent] = r;
+          }
+
+          // Check for existence of machine
+          if (!machinesystem.physList[srv.hostname]) {
+            var s = new Phys(srv.hostname);
+            machinesystem.physList[srv.hostname] = s;
+            machinesystem.rackList[srv.parent].addPhysicalServer(s);
+          }
+          machinesystem.physList[srv.hostname].update(srv);
+        } else if (srv.kind == 'virtual') {
+          return; // Do this later
+        } else {
+          console.log('bad server record: ' + srv.hostname);
+        }
+      }
     }
   });
 }
@@ -58,6 +79,12 @@ function Phys(name) {
   this.orbitRadius = 0.0;
   this.theta = 0.0;
   this.radius = 0.0;
+}
+
+Phys.prototype.update = function(serverData) {
+  this.mem = serverData.mem;
+  this.cpu = serverData.cpu;
+  this.disk = serverData.disk;
 }
 
 Phys.prototype.addVirtualServer = function(vServer) {
