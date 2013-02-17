@@ -24,7 +24,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
-            var p = new Phys(srv.hostname);
+            var p = new Phys(srv.hostname, srv.parent);
             machinesystem.physList[srv.hostname] = p;
             machinesystem.rackList[srv.parent].addPhysicalServer(p);
           } else if (!machinesystem.physList[srv.hostname].racked) {
@@ -41,7 +41,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.virtList[srv.hostname]) {
-            var s = new Virt(srv.hostname);
+            var s = new Virt(srv.hostname, srv.parent);
             machinesystem.virtList[srv.hostname] = s;
             machinesystem.physList[srv.parent].addVirtualServer(s);
           }
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 function Rack(name) {
   this.name = name;
-  this.count = 0;
+  this.count = 0; // Incl. subchildren
   this.children = [];
 
   this.x = (Math.random()-0.5) * 250.0;
@@ -89,15 +89,16 @@ Rack.prototype.draw = function() {
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
-  for (var i=this.count-1; i>=0; i--) {
+  for (var i=this.children.length-1; i>=0; i--) {
     this.children[i].draw();
   }
 
   mvPopMatrix();
 }
 
-function Phys(name) {
+function Phys(name, parent) {
   this.name = name;
+  this.parent = parent;
   this.mem = 0;
   this.cpu = 0;
   this.disk = 0;
@@ -120,12 +121,13 @@ Phys.prototype.update = function(serverData) {
 
 Phys.prototype.addVirtualServer = function(vServer) {
   this.count++;
+  machinesystem.rackList[this.parent].count++;
   this.children.push(vServer);
 }
 
 Phys.prototype.draw = function() {
   // Update code
-  this.orbitRadius = (this.orbitRadius + (this.mem/100000.0))/2;
+  this.orbitRadius = (this.orbitRadius + (this.mem/50000.0))/2;
   this.theta = (this.theta + (this.cpu/1000.0)) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/1000000.0))/2;
 
@@ -141,15 +143,16 @@ Phys.prototype.draw = function() {
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
-  for (var i=this.count-1; i>=0; i--) {
+  for (var i=this.children.length-1; i>=0; i--) {
     this.children[i].draw();
   }
 
   mvPopMatrix();
 }
 
-function Virt(name) {
+function Virt(name, parent) {
   this.name = name;
+  this.parent = parent;
   this.mem = 0;
   this.cpu = 0;
   this.disk = 0;
@@ -167,7 +170,7 @@ Virt.prototype.update = function(serverData) {
 
 Virt.prototype.draw = function() {
     // Update code
-  this.orbitRadius = (this.orbitRadius + (this.mem/1000000.0))/2;
+  this.orbitRadius = (this.orbitRadius + (this.mem/500000.0))/2;
   this.theta = (this.theta + (this.cpu/1000.0)) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/10000000.0))/2;
 
