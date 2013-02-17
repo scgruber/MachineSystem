@@ -2,23 +2,23 @@
 
 $(document).ready(function() {
   $(document).keydown(function(event) {
-    switch (event.which) {
-      case 65: // A (Left)
+    switch (String.fromCharCode(event.which)) {
+      case 'A': // A (Left)
         glData.view.x++;
         break;
-      case 68: // D (Right)
+      case 'D': // D (Right)
         glData.view.x--;
         break;
-      case 83: // S (Down)
+      case 'S': // S (Down)
         glData.view.y--;
         break;
-      case 87: // W (Up)
+      case 'W': // W (Up)
         glData.view.y++;
         break;
-      case 88: // X (Out)
+      case 'X': // X (Out)
         glData.view.z--;
         break;
-      case 90: // Z (In)
+      case 'Z': // Z (In)
         glData.view.z++;
         break;
     }
