@@ -152,8 +152,8 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
-  this.orbit = (this.orbit + (0.1*this.mem/10000.0))/1.1;
-  this.radius = (this.radius + (0.1*this.disk/50000.0))/1.1;
+  this.orbit = (this.orbit + (0.1*this.mem/1000.0))/1.1;
+  this.radius = this.disk/500000.0;
   this.speed = (this.speed + (0.1*this.cpu/5000.0))/1.1;
   pNode = this.rack;
   if (pNode) {
