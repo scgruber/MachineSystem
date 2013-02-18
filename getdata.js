@@ -59,7 +59,7 @@ $(document).ready(function() {
   updateServers();
   window.setInterval(function() {
     updateServers();
-  }, 5000);
+  }, 3000);
 });
 
 function Rack(name) {
