@@ -23,6 +23,9 @@ function init() {
   renderer = new THREE.CanvasRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
 
+  while (document.body.firstChild) {
+    document.body.removeChild(document.body.firstChild);
+  }
   document.body.appendChild(renderer.domElement);
 }
 
@@ -108,6 +111,9 @@ Rack.prototype.addPhysicalServer = function(pServer) {
 }
 
 Rack.prototype.animate = function() {
+  this.mesh.scale.x = this.count+1;
+  this.mesh.scale.y = this.count+1;
+  this.mesh.scale.z = this.count+1;
 }
 
 function Phys(name, parent) {
@@ -121,7 +127,7 @@ function Phys(name, parent) {
   this.children = [];
 
   this.mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(25, 16, 16),
+    new THREE.SphereGeometry(10, 16, 16),
     new THREE.MeshLambertMaterial({color: 0x7fff7f})
   );
   this.theta = 0.0;
@@ -146,11 +152,17 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
+  this.orbit = (this.orbit + (0.1*this.mem/10000.0))/1.1;
+  this.radius = (this.radius + (0.1*this.disk/50000.0))/1.1;
+  this.speed = (this.speed + (0.1*this.cpu/5000.0))/1.1;
   pNode = this.rack;
   if (pNode) {
     this.theta += this.speed;
     this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
     this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
+    this.mesh.scale.x = this.radius;
+    this.mesh.scale.y = this.radius;
+    this.mesh.scale.z = this.radius;
   }
 }
 
