@@ -95,10 +95,6 @@ function Rack(name) {
     new THREE.MeshLambertMaterial({color: 0xff7f7f})
   );
 
-  //this.mesh.position.x = Math.random()*50;
-  //this.mesh.position.y = Math.random()*50;
-  //this.mesh.position.z = Math.random()*50;
-
   scene.add(this.mesh);
 }
 
@@ -109,13 +105,6 @@ Rack.prototype.addPhysicalServer = function(pServer) {
 }
 
 Rack.prototype.animate = function() {
-  this.count = this.children.length;
-  for (var i=this.children.length-1; i>=0; i--) {
-    this.count += this.children[i].children.length;
-  }
-  this.mesh.scale.x = this.count+1;
-  this.mesh.scale.y = this.count+1;
-  this.mesh.scale.z = this.count+1;
 }
 
 function Phys(name, parent) {
@@ -134,6 +123,8 @@ function Phys(name, parent) {
   );
   this.theta = 0.0;
   this.orbit = 0.0;
+  this.speed = 0.0;
+  this.radius = 0.0;
 
   this.racked = false;
 }
@@ -150,10 +141,6 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
-  var pNode = machinesystem.rackList[this.parent];
-  this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
-  this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
-  this.mesh.position.z = pNode.mesh.position.z;
 }
 
 function Virt(name, parent) {
@@ -163,7 +150,7 @@ function Virt(name, parent) {
   this.cpu = 0;
   this.disk = 0;
 
-  this.orbitRadius = 0.0;
+  this.orbit = 0.0;
   this.speed = 0.0;
   this.theta = 0.0;
   this.radius = 0.0;
@@ -175,10 +162,5 @@ Virt.prototype.update = function(serverData) {
   this.disk = serverData.disk;
 }
 
-Virt.prototype.draw = function() {
-    // Update code
-  this.orbitRadius = (this.orbitRadius + (this.mem/50000.0))/2;
-  this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
-  this.theta = (this.theta + this.speed + 0.01) % (2*Math.PI);
-  this.radius = (this.radius + (this.disk/1000000.0))/2;
+Virt.prototype.animate = function() {
 }
