@@ -109,7 +109,7 @@ Rack.prototype.animate = function() {
 
 function Phys(name, parent) {
   this.name = name;
-  this.parent = parent;
+  this.rack = parent;
   this.mem = 0;
   this.cpu = 0;
   this.disk = 0;
@@ -143,7 +143,7 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
-  pNode = machinesystem.rackList[this.parent];
+  pNode = machinesystem.rackList[this.rack];
   this.theta += this.speed;
   this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
   this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
@@ -151,7 +151,7 @@ Phys.prototype.animate = function() {
 
 function Virt(name, parent) {
   this.name = name;
-  this.parent = parent;
+  this.dom0 = parent;
   this.mem = 0;
   this.cpu = 0;
   this.disk = 0;
