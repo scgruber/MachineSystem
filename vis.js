@@ -21,7 +21,7 @@ function init() {
 
   scene = new THREE.Scene();
 
-  renderer = new THREE.CanvasRenderer();
+  renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   while (document.body.firstChild) {
