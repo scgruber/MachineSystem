@@ -143,9 +143,10 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
+  pNode = machinesystem.rackList[this.parent];
   this.theta += this.speed;
-  this.mesh.position.x = this.orbit * Math.cos(this.theta);
-  this.mesh.position.y = this.orbit * Math.sin(this.theta);
+  this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
+  this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
 }
 
 function Virt(name, parent) {
