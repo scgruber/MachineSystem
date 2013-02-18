@@ -55,7 +55,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
-            var p = new Phys(srv.hostname, srv.parent);
+            var p = new Phys(srv.hostname, machineSystem.rackList[srv.parent]);
             machinesystem.physList[srv.hostname] = p;
             machinesystem.rackList[srv.parent].addPhysicalServer(p);
           } else if (!machinesystem.physList[srv.hostname].racked) {
@@ -72,7 +72,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.virtList[srv.hostname]) {
-            var s = new Virt(srv.hostname, srv.parent);
+            var s = new Virt(srv.hostname, machineSystem.physList[srv.parent]);
             machinesystem.virtList[srv.hostname] = s;
             machinesystem.physList[srv.parent].addVirtualServer(s);
           }
@@ -143,7 +143,7 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
-  pNode = machinesystem.rackList[this.rack];
+  pNode = this.rack;
   this.theta += this.speed;
   this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
   this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
