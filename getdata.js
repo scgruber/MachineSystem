@@ -154,7 +154,7 @@ Phys.prototype.draw = function(interval) {
   mvPushMatrix();
 
   mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
-  mat4.translate(glData.mvMatrix, [this.orbitRadius+(machinesystem.rackList[this.parent].count*machinesystem.rackList[this.parent].count*machinesystem.rackList[this.parent].count), 0, 0]);
+  mat4.translate(glData.mvMatrix, [this.orbitRadius+(machinesystem.rackList[this.parent].count*machinesystem.rackList[this.parent].count*2), 0, 0]);
 
   mvPushMatrix();
   mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
