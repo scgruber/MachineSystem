@@ -32,6 +32,7 @@ function updateServers() {
           } else if (!machinesystem.physList[srv.hostname].racked) {
             // In case we created as dummy for a virtual machine
             machinesystem.rackList[srv.parent].addPhysicalServer(machinesystem.physList[srv.hostname]);
+            machinesystem.physList[srv.hostname].parent = srv.parent;
           }
           machinesystem.physList[srv.hostname].update(srv);
         } else if (srv.kind == 'virtual') {
