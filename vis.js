@@ -4,6 +4,7 @@ var machinesystem = {
   physList: {},
   virtList: {}
 };
+var zAxis = new THREE.vector3(0,0,1);
 
 $(document).ready(function() {
   init();
@@ -155,11 +156,16 @@ Phys.prototype.animate = function() {
   this.orbit = (this.orbit + (0.1*this.mem/1000.0))/1.1;
   this.radius = this.disk/500000.0;
   this.speed = (this.speed + (0.1*this.cpu/5000.0))/1.1;
+  this.theta += this.speed;
   pNode = this.rack;
   if (pNode) {
-    this.theta += this.speed;
-    this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
-    this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
+    var v = new THREE.vector3(this.orbit,0,0);
+    var m = new THREE.Matrix4().makeRotationAxis(zAxis, this.theta);
+    m.multiplyVector3(v);
+
+    this.mesh.position.x = pNode.mesh.position.x + v.x;
+    this.mesh.position.y = pNode.mesh.position.y + v.y;
+    this.mesh.position.z = pNode.mesh.position.z + v.z;
     this.mesh.scale.x = this.radius;
     this.mesh.scale.y = this.radius;
     this.mesh.scale.z = this.radius;
