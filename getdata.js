@@ -82,7 +82,7 @@ Rack.prototype.addPhysicalServer = function(pServer) {
   pServer.racked = true;
 }
 
-Rack.prototype.draw = function() {
+Rack.prototype.draw = function(interval) {
   //Update Code
   this.count = this.children.length*2;
   for (var i=this.children.length-1; i>=0; i--) {
@@ -106,7 +106,7 @@ Rack.prototype.draw = function() {
   mvPopMatrix();
 
   for (var i=this.children.length-1; i>=0; i--) {
-    this.children[i].draw();
+    this.children[i].draw(interval);
   }
 
   mvPopMatrix();
@@ -141,11 +141,11 @@ Phys.prototype.addVirtualServer = function(vServer) {
   this.children.push(vServer);
 }
 
-Phys.prototype.draw = function() {
+Phys.prototype.draw = function(interval) {
   // Update code
   this.orbitRadius = (this.orbitRadius + (this.mem/5000.0))/2;
   this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
-  this.theta = (this.theta + this.speed + 0.01) % (2*Math.PI);
+  this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/500000.0))/2;
   this.radius += this.count;
 
@@ -167,7 +167,7 @@ Phys.prototype.draw = function() {
   mvPopMatrix();
 
   for (var i=this.children.length-1; i>=0; i--) {
-    this.children[i].draw();
+    this.children[i].draw(interval);
   }
 
   mvPopMatrix();
@@ -192,11 +192,11 @@ Virt.prototype.update = function(serverData) {
   this.disk = serverData.disk;
 }
 
-Virt.prototype.draw = function() {
+Virt.prototype.draw = function(interval) {
     // Update code
   this.orbitRadius = (this.orbitRadius + (this.mem/50000.0))/2;
   this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
-  this.theta = (this.theta + this.speed + 0.01) % (2*Math.PI);
+  this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/1000000.0))/2;
 
   // Draw code

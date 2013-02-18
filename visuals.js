@@ -14,7 +14,8 @@ var glData = {
     x: 0,
     y: 0,
     z: -750
-  }
+  },
+  tic: 0
 };
 
 var gl;
@@ -121,7 +122,7 @@ function initBuffers() {
   glData.buf.virtVertexCol.numItems = 4;
 }
 
-function drawScene() {
+function drawScene(interval) {
   gl.viewport(0, 0, gl.vpWidth, gl.vpHeight);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -130,7 +131,7 @@ function drawScene() {
   mat4.translate(glData.mvMatrix, [glData.view.x, glData.view.y, glData.view.z]);
 
   for (r in machinesystem.rackList) {
-    machinesystem.rackList[r].draw();
+    machinesystem.rackList[r].draw(interval);
   }
 }
 
@@ -139,9 +140,11 @@ function updateScene() {
 }
 
 function doNextFrame() {
+  toc = new Date().getTime();
   requestAnimFrame(doNextFrame);
-  drawScene();
+  drawScene((toc-tic)/1000.0);
   updateScene();
+  tic = toc;
 }
 
 function webGLStart() {
@@ -154,4 +157,6 @@ function webGLStart() {
   gl.enable(gl.DEPTH_TEST);
 
   doNextFrame();
+
+  tic = new Date().getTime();
 }
