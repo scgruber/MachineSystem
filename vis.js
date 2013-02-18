@@ -53,6 +53,9 @@ function updateServers() {
             machinesystem.rackList[srv.parent] = r;
           }
 
+          if (!machinesystem.rackList[srv.parent]) {
+            alert('This makes no sense!');
+          }
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
             var p = new Phys(srv.hostname, machinesystem.rackList[srv.parent]);
