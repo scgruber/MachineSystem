@@ -126,7 +126,7 @@ function Phys(name, parent) {
 
   this.orbitRadius = 0.0;
   this.speed = 0.0;
-  this.theta = 0.0;
+  this.theta = Math.random()*Math.PI*2;
   this.radius = 0.0;
 
   this.racked = false;
@@ -183,7 +183,7 @@ function Virt(name, parent) {
 
   this.orbitRadius = 0.0;
   this.speed = 0.0;
-  this.theta = 0.0;
+  this.theta = Math.random()*Math.PI*2;
   this.radius = 0.0;
 }
 
