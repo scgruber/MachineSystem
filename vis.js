@@ -4,7 +4,7 @@ var machinesystem = {
   physList: {},
   virtList: {}
 };
-var zAxis = new THREE.vector3(0,0,1);
+var zAxis = new THREE.Vector3(0,0,1);
 
 $(document).ready(function() {
   init();
