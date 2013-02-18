@@ -161,7 +161,7 @@ Phys.prototype.animate = function() {
   if (pNode) {
     var v = new THREE.Vector3(this.orbit,0,0);
     var m = new THREE.Matrix4().makeRotationAxis(zAxis, this.theta);
-    m.multiplyVector3(v);
+    m.applyMatrix(v);
 
     this.mesh.position.x = pNode.mesh.position.x + v.x;
     this.mesh.position.y = pNode.mesh.position.y + v.y;
