@@ -13,7 +13,7 @@ var glData = {
   view: {
     x: 0,
     y: 0,
-    z: -2500
+    z: -3000
   },
   tic: 0
 };
