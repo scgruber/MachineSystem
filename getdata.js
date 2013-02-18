@@ -204,7 +204,7 @@ Virt.prototype.draw = function(interval) {
   mvPushMatrix();
 
   mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
-  mat4.translate(glData.mvMatrix, [this.orbitRadius+(machinesystem.physList[this.parent].radius*machinesystem.physList[this.parent].radius), 0, 0]);
+  mat4.translate(glData.mvMatrix, [this.orbitRadius+(machinesystem.physList[this.parent].radius*1.5), 0, 0]);
   mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
