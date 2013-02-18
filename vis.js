@@ -55,7 +55,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
-            var p = new Phys(srv.hostname, machineSystem.rackList[srv.parent]);
+            var p = new Phys(srv.hostname, machinesystem.rackList[srv.parent]);
             machinesystem.physList[srv.hostname] = p;
             machinesystem.rackList[srv.parent].addPhysicalServer(p);
           } else if (!machinesystem.physList[srv.hostname].racked) {
@@ -72,7 +72,7 @@ function updateServers() {
 
           // Check for existence of machine
           if (!machinesystem.virtList[srv.hostname]) {
-            var s = new Virt(srv.hostname, machineSystem.physList[srv.parent]);
+            var s = new Virt(srv.hostname, machinesystem.physList[srv.parent]);
             machinesystem.virtList[srv.hostname] = s;
             machinesystem.physList[srv.parent].addVirtualServer(s);
           }
