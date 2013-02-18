@@ -89,6 +89,8 @@ Rack.prototype.draw = function() {
   mvPushMatrix();
 
   mat4.translate(glData.mvMatrix, [this.x, this.y, this.z]);
+
+  mvPushMatrix();
   mat4.scale(glData.mvMatrix, [this.count+1, this.count+1, this.count+1])
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
@@ -97,6 +99,7 @@ Rack.prototype.draw = function() {
   gl.vertexAttribPointer(glData.shaderProgram.vertexCol, glData.buf.rackVertexCol.itemSize, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
+  mvPopMatrix();
 
   for (var i=this.children.length-1; i>=0; i--) {
     this.children[i].draw();
@@ -147,6 +150,8 @@ Phys.prototype.draw = function() {
 
   mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
   mat4.translate(glData.mvMatrix, [this.orbitRadius+2, 0, 0]);
+
+  mvPushMatrix();
   mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
@@ -155,6 +160,7 @@ Phys.prototype.draw = function() {
   gl.vertexAttribPointer(glData.shaderProgram.vertexCol, glData.buf.physVertexCol.itemSize, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
+  mvPopMatrix();
 
   for (var i=this.children.length-1; i>=0; i--) {
     this.children[i].draw();
