@@ -122,11 +122,13 @@ function Phys(name, parent) {
     new THREE.MeshLambertMaterial({color: 0x7fff7f})
   );
   this.theta = 0.0;
-  this.orbit = 0.0;
-  this.speed = 0.0;
+  this.orbit = 10.0;
+  this.speed = 0.1;
   this.radius = 0.0;
 
   this.racked = false;
+
+  scene.add(this.mesh);
 }
 
 Phys.prototype.update = function(serverData) {
@@ -141,6 +143,9 @@ Phys.prototype.addVirtualServer = function(vServer) {
 }
 
 Phys.prototype.animate = function() {
+  this.theta += this.speed;
+  this.mesh.position.x = this.orbit * Math.cos(this.theta);
+  this.mesh.position.y = this.orbit * Math.sin(this.theta);
 }
 
 function Virt(name, parent) {
