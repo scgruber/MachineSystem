@@ -52,7 +52,7 @@ function updateServers() {
             var r = new Rack(srv.parent);
             machinesystem.rackList[srv.parent] = r;
           }
-          
+
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
             var p = new Phys(srv.hostname, machinesystem.rackList[srv.parent]);
@@ -94,6 +94,9 @@ function Rack(name) {
     new THREE.SphereGeometry(25, 16, 16),
     new THREE.MeshLambertMaterial({color: 0xff7f7f})
   );
+
+  this.mesh.position.x = (Math.random()-0.5)*100.0;
+  this.mesh.position.y = (Math.random()-0.5)*100.0;
 
   scene.add(this.mesh);
 }
