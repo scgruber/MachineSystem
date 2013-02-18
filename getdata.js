@@ -147,7 +147,7 @@ Phys.prototype.draw = function(interval) {
   // Update code
   this.orbitRadius = (this.orbitRadius + (this.mem/5000.0))/2;
   this.speed = (this.speed + (0.001 * this.cpu / 5000.0)) / 1.001;
-  this.theta = (this.theta + (this.speed*interval) + 0.001) % (2*Math.PI);
+  this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/100000.0))/2;
 
   // Draw code
@@ -197,7 +197,7 @@ Virt.prototype.draw = function(interval) {
     // Update code
   this.orbitRadius = (this.orbitRadius + (this.mem/50000.0))/2;
   this.speed = (this.speed + (0.001 * this.cpu / 5000.0)) / 1.001;
-  this.theta = (this.theta + (this.speed*interval) + 0.001) % (2*Math.PI);
+  this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/1000000.0))/2;
 
   // Draw code
