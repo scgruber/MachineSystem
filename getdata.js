@@ -9,6 +9,8 @@ var machinesystem = {
   virtList: {}
 };
 
+var rackNum = 0;
+
 function updateServers() {
   $.ajax(drowsyUrl + '/machinesystem/server', {
     type: 'get',
@@ -67,8 +69,8 @@ function Rack(name) {
   this.count = 0; // Incl. subchildren
   this.children = [];
 
-  this.x = (Math.random()-0.5) * 500.0;
-  this.y = (Math.random()-0.5) * 500.0;
+  this.x = (250.0 * rackNum) - 875.0;
+  this.y = 0.0;
   this.z = 0.0;
 }
 

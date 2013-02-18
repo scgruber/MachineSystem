@@ -13,7 +13,7 @@ var glData = {
   view: {
     x: 0,
     y: 0,
-    z: -500
+    z: -750
   }
 };
 
@@ -125,7 +125,7 @@ function drawScene() {
   gl.viewport(0, 0, gl.vpWidth, gl.vpHeight);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  mat4.perspective(45, gl.vpWidth / gl.vpHeight, 0.1, 1000.0, glData.pMatrix);
+  mat4.perspective(45, gl.vpWidth / gl.vpHeight, 0.1, 1500.0, glData.pMatrix);
   mat4.identity(glData.mvMatrix);
   mat4.translate(glData.mvMatrix, [glData.view.x, glData.view.y, glData.view.z]);
 
