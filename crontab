@@ -1,0 +1,1 @@
+* * * * * /bin/bash /opt/machine-system/stats.sh >/dev/null 2>&1
