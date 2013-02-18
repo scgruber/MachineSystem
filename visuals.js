@@ -142,9 +142,9 @@ function updateScene() {
 function doNextFrame() {
   toc = new Date().getTime();
   requestAnimFrame(doNextFrame);
-  drawScene((toc-tic)/1000.0);
+  drawScene((toc-glData.tic)/1000.0);
   updateScene();
-  tic = toc;
+  glData.tic = toc;
 }
 
 function webGLStart() {
@@ -158,5 +158,5 @@ function webGLStart() {
 
   doNextFrame();
 
-  tic = new Date().getTime();
+  glData.tic = new Date().getTime();
 }
