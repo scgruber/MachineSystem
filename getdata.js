@@ -67,8 +67,8 @@ function Rack(name) {
   this.count = 0; // Incl. subchildren
   this.children = [];
 
-  this.x = (Math.random()-0.5) * 250.0;
-  this.y = (Math.random()-0.5) * 250.0;
+  this.x = (Math.random()-0.5) * 500.0;
+  this.y = (Math.random()-0.5) * 500.0;
   this.z = 0.0;
 }
 
@@ -80,7 +80,7 @@ Rack.prototype.addPhysicalServer = function(pServer) {
 
 Rack.prototype.draw = function() {
   //Update Code
-  this.count = 0;
+  this.count = this.children.length;
   for (var i=this.children.length-1; i>=0; i--) {
     this.count += this.children[i].children.length;
   }
@@ -140,6 +140,7 @@ Phys.prototype.draw = function() {
   this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
   this.theta = (this.theta + this.speed + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/1000000.0))/2;
+  this.radius += this.count;
 
   // Draw code
   mvPushMatrix();
