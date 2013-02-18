@@ -147,13 +147,13 @@ Phys.prototype.draw = function(interval) {
   this.orbitRadius = (this.orbitRadius + (this.mem/5000.0))/2;
   this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
   this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
-  this.radius = (this.radius + (this.disk/500000.0))/2;
+  this.radius = (this.radius + (this.disk/100000.0))/2;
 
   // Draw code
   mvPushMatrix();
 
   mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
-  mat4.translate(glData.mvMatrix, [this.orbitRadius+2, 0, 0]);
+  mat4.translate(glData.mvMatrix, [this.orbitRadius+(machinesystem.rackList[this.parent].count*machinesystem.rackList[this.parent].count), 0, 0]);
 
   mvPushMatrix();
   mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
@@ -203,7 +203,7 @@ Virt.prototype.draw = function(interval) {
   mvPushMatrix();
 
   mat4.rotate(glData.mvMatrix, this.theta, [0, 0, 1]);
-  mat4.translate(glData.mvMatrix, [this.orbitRadius+1, 0, 0]);
+  mat4.translate(glData.mvMatrix, [this.orbitRadius+machinesystem.physList[this.parent].radius, 0, 0]);
   mat4.scale(glData.mvMatrix, [this.radius, this.radius, this.radius]);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
