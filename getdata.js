@@ -93,6 +93,8 @@ Rack.prototype.draw = function() {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.rackVertexCol);
+  gl.vertexAttribPointer(glData.shaderProgram.vertexCol, glData.buf.rackVertexCol.itemSize, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
@@ -148,6 +150,8 @@ Phys.prototype.draw = function() {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.physVertexCol);
+  gl.vertexAttribPointer(glData.shaderProgram.vertexCol, glData.buf.physVertexCol.itemSize, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 
@@ -193,6 +197,8 @@ Virt.prototype.draw = function() {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
   gl.vertexAttribPointer(glData.shaderProgram.vertexPos, glData.buf.nodeVertexPos.itemSize, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.virtVertexCol);
+  gl.vertexAttribPointer(glData.shaderProgram.vertexCol, glData.buf.virtVertexCol.itemSize, gl.FLOAT, false, 0, 0);
   setMatrixUniforms();
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, glData.buf.nodeVertexPos.numItems);
 

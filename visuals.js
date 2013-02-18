@@ -5,7 +5,10 @@ var glData = {
   mvMatrix: mat4.create(),
   mvMatrixStack: [],
   buf: {
-    nodeVertexPos: null
+    nodeVertexPos: null,
+    rackVertexCol: null,
+    physVertexCol: null,
+    virtVertexCol: null
   },
   view: {
     x: 0,
@@ -46,6 +49,9 @@ function initShaders() {
   glData.shaderProgram.vertexPos = gl.getAttribLocation(glData.shaderProgram, 'aVertexPosition');
   gl.enableVertexAttribArray(glData.shaderProgram.vertexPos);
 
+  glData.shaderProgram.vertexCol = gl.getAttribLocation(glData.shaderProgram, 'aVertexColor');
+  gl.enableVertexAttribArray(glData.shaderProgram.vertexCol);
+
   glData.shaderProgram.pMatrixUniform = gl.getUniformLocation(glData.shaderProgram, 'uPMatrix');
   glData.shaderProgram.mvMatrixUniform = gl.getUniformLocation(glData.shaderProgram, 'uMVMatrix');
 }
@@ -71,17 +77,48 @@ function mvPopMatrix() {
 function initBuffers() {
   glData.buf.nodeVertexPos = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
-
   var vertices = [
     1.0,  1.0,  0.0,
    -1.0,  1.0,  0.0,
     1.0, -1.0,  0.0,
    -1.0, -1.0,  0.0
   ];
-
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
   glData.buf.nodeVertexPos.itemSize = 3;
   glData.buf.nodeVertexPos.numItems = 4;
+
+
+  glData.buf.rackVertexCol = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.rackVertexCol);
+  colors = [];
+  for (var i=0; i<4; i++) {
+    colors = colors.concat([1.0, 0.5, 0.5, 1.0]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+  glData.buf.rackVertexCol.itemSize = 4;
+  glData.buf.rackVertexCol.numItems = 4;
+
+
+  glData.buf.physVertexCol = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.physVertexCol);
+  colors = [];
+  for (var i=0; i<4; i++) {
+    colors = colors.concat([0.5, 1.0, 0.5, 1.0]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+  glData.buf.physVertexCol.itemSize = 4;
+  glData.buf.physVertexCol.numItems = 4;
+
+
+  glData.buf.virtVertexCol = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.virtVertexCol);
+  colors = [];
+  for (var i=0; i<4; i++) {
+    colors = colors.concat([0.5, 0.5, 1.0, 1.0]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+  glData.buf.virtVertexCol.itemSize = 4;
+  glData.buf.virtVertexCol.numItems = 4;
 }
 
 function drawScene() {
