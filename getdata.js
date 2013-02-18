@@ -72,6 +72,8 @@ function Rack(name) {
   this.x = (250.0 * rackNum) - 875.0;
   this.y = 0.0;
   this.z = 0.0;
+
+  rackNum++;
 }
 
 Rack.prototype.addPhysicalServer = function(pServer) {
