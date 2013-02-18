@@ -52,10 +52,7 @@ function updateServers() {
             var r = new Rack(srv.parent);
             machinesystem.rackList[srv.parent] = r;
           }
-
-          if (!machinesystem.rackList[srv.parent]) {
-            alert('This makes no sense!');
-          }
+          
           // Check for existence of machine
           if (!machinesystem.physList[srv.hostname]) {
             var p = new Phys(srv.hostname, machinesystem.rackList[srv.parent]);
@@ -147,9 +144,11 @@ Phys.prototype.addVirtualServer = function(vServer) {
 
 Phys.prototype.animate = function() {
   pNode = this.rack;
-  this.theta += this.speed;
-  this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
-  this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
+  if (pNode) {
+    this.theta += this.speed;
+    this.mesh.position.x = pNode.mesh.position.x + (this.orbit * Math.cos(this.theta));
+    this.mesh.position.y = pNode.mesh.position.y + (this.orbit * Math.sin(this.theta));
+  }
 }
 
 function Virt(name, parent) {
