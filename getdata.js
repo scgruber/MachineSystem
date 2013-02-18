@@ -70,8 +70,8 @@ function Rack(name) {
   this.count = 0; // Incl. subchildren
   this.children = [];
 
-  this.x = (250.0 * rackNum) - 875.0;
-  this.y = (Math.random()-0.5) * 750.0;
+  this.x = 500.0 * Math.cos((Math.PI/4)*rackNum);
+  this.y = 500.0 * Math.sin((Math.PI/4)*rackNum);
   this.z = 0.0;
 
   rackNum++;
