@@ -33,12 +33,12 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
 
-  for (rack in machinesystem.rackList) {
-    machinesystem.rackList[rack].animate();
-    for (var i=machinesystem.rackList[rack].children.length-1; i>=0; i--) {
-      machinesystem.rackList[rack].children[i].animate();
-    }
-  }
+//  for (rack in machinesystem.rackList) {
+//    machinesystem.rackList[rack].animate();
+//    for (var i=machinesystem.rackList[rack].children.length-1; i>=0; i--) {
+//      machinesystem.rackList[rack].children[i].animate();
+//    }
+//  }
 
   renderer.render(scene, camera);
 }
