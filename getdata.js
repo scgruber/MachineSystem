@@ -70,8 +70,8 @@ function Rack(name) {
   this.count = 0; // Incl. subchildren
   this.children = [];
 
-  this.x = 500.0 * Math.cos((Math.PI/4)*rackNum);
-  this.y = 500.0 * Math.sin((Math.PI/4)*rackNum);
+  this.x = 750.0 * Math.cos((Math.PI/3.5)*rackNum);
+  this.y = 750.0 * Math.sin((Math.PI/3.5)*rackNum);
   this.z = 0.0;
 
   rackNum++;
