@@ -95,8 +95,8 @@ function Rack(name) {
     new THREE.MeshLambertMaterial({color: 0xff7f7f})
   );
 
-  this.mesh.position.x = (Math.random()-0.5)*10000.0;
-  this.mesh.position.y = (Math.random()-0.5)*10000.0;
+  this.mesh.position.x = (Math.random()-0.5)*1000.0;
+  this.mesh.position.y = (Math.random()-0.5)*1000.0;
 
   scene.add(this.mesh);
 }
