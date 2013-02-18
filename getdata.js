@@ -70,7 +70,7 @@ function Rack(name) {
   this.children = [];
 
   this.x = (250.0 * rackNum) - 875.0;
-  this.y = 0.0;
+  this.y = (Math.random()-0.5) * 750.0;
   this.z = 0.0;
 
   rackNum++;
@@ -95,6 +95,7 @@ Rack.prototype.draw = function(interval) {
   mat4.translate(glData.mvMatrix, [this.x, this.y, this.z]);
 
   mvPushMatrix();
+  mat4.scale(glData.mvMatrix, [this.count+1, this.count+1, this.count+1])
   mat4.scale(glData.mvMatrix, [this.count+1, this.count+1, this.count+1])
 
   gl.bindBuffer(gl.ARRAY_BUFFER, glData.buf.nodeVertexPos);
@@ -147,7 +148,6 @@ Phys.prototype.draw = function(interval) {
   this.speed = (this.speed + (0.001 * this.cpu / 1000.0)) / 1.001;
   this.theta = (this.theta + (this.speed*interval) + 0.01) % (2*Math.PI);
   this.radius = (this.radius + (this.disk/500000.0))/2;
-  this.radius += this.count;
 
   // Draw code
   mvPushMatrix();
