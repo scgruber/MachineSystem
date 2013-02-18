@@ -159,7 +159,7 @@ Phys.prototype.animate = function() {
   this.theta += this.speed;
   pNode = this.rack;
   if (pNode) {
-    var v = new THREE.vector3(this.orbit,0,0);
+    var v = new THREE.Vector3(this.orbit,0,0);
     var m = new THREE.Matrix4().makeRotationAxis(zAxis, this.theta);
     m.multiplyVector3(v);
 
