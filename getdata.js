@@ -1,3 +1,6 @@
+// Machine System
+// Sam Gruber
+
 $.support.cors = true;
 
 var drowsyUrl = "http://visium.club.cc.cmu.edu:8080";

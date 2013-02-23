@@ -1,3 +1,6 @@
+// Machine System
+// Sam Gruber
+
 // Keyboard control of pan and zoom
 
 $(document).ready(function() {

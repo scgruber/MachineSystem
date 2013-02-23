@@ -1,3 +1,6 @@
+// Machine System
+// Sam Gruber
+
 // Global GL data structure
 var glData = {
   shaderProgram: null,

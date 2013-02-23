@@ -1,3 +1,6 @@
+// Machine System
+// Sam Gruber
+//
 // Global shader list
 
 var shaderScripts = {};
